@@ -18,5 +18,6 @@ export const state = (): EmbudoListState => ({
         byNombre: null,
         byEtapa: null
     },
-    isLoading: false
+    isLoading: false,
+    causasCancelacion: []
 })

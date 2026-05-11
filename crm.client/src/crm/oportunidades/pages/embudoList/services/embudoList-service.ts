@@ -38,5 +38,23 @@ export const EmbudoListService = {
         }
         catch { return defaultResponse }
         finally { abortController = null }
+    },
+
+    cancelarOportunidad: async (oportunidadId: number, causaId: number): Promise<ApiWrapper<boolean>> => {
+        try {
+            const res = await apiInstance.delete<ApiWrapper<boolean>>('oportunidades', {
+                data: {
+                    oportunidadId,
+                    causaId
+                }
+            })
+            return res.data
+        } catch {
+            return {
+                succeeded: false,
+                message: 'Error al cancelar la oportunidad',
+                data: false
+            } as ApiWrapper<boolean>
+        }
     }
 }

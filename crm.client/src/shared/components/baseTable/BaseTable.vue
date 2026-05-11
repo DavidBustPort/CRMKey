@@ -22,8 +22,14 @@
                 />
 
                 <template v-if="props.items.length > 0">
-                    <template v-for="(item) in props.items">
+                    <template v-for="(item, index) in props.items" :key="index">
                         <slot name="row" :item="item" />
+
+                        <tr v-if="$slots['row-detail']" class="row-detail-container">
+                            <td :colspan="props.colspan" class="p-0 border-0">
+                                <slot name="row-detail" :item="item" />
+                            </td>
+                        </tr>
                     </template>
                 </template>
 

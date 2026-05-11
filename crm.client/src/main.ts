@@ -17,6 +17,18 @@ const pinia = createPinia().use(piniaPlugin)
 import PrimeVue from 'primevue/config'
 import Aura from '@primevue/themes/aura'
 
+import 'animate.css'
+
+import 'notivue/notification.css'
+import 'notivue/animations.css'
+import { createNotivue } from 'notivue'
+const notivue = createNotivue({
+    position: 'top-right',
+    limit: 3,
+    enqueue: true,
+    pauseOnHover: true
+})
+
 import { setupInterceptors } from './core/interceptors'
 
 const app = createApp(App)
@@ -28,6 +40,7 @@ app.use(PrimeVue, {
         preset: Aura
     }
 })
+app.use(notivue)
 
 setupInterceptors()
 

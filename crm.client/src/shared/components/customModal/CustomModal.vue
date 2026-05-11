@@ -45,7 +45,7 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue'
+import { computed, onUnmounted, watch } from 'vue'
 import { useModal } from './useModal'
 
 const {
@@ -88,6 +88,12 @@ const confirm = () => {
 const handleBackdropClick = () => {
     if (options.closeOnBackdropClick) close()
 }
+
+watch(isVisible, (newValue) => {
+    document.body.style.overflow = newValue ? 'hidden' : 'auto'
+})
+
+onUnmounted(() => document.body.style.overflow = 'auto')
 
 defineExpose({
     isVisible,

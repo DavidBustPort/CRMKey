@@ -6,7 +6,8 @@ import { faChevronUp, faCircleUser, faUpRightAndDownLeftFromCenter,
     faChartLine, faChevronDown, faFileExcel, faTachometerAlt, faUser, faUserTie, faSearch,
     faUsers, faCheck, faFileExport, faFilter, faList, faInbox, faUserPlus, faEllipsisVertical,
     faTrashCan, faEye, faEdit, faPlus, faChartPie, faLink, faXmark, faSquareCheck, faChevronRight,
-    faSpinner, faDiagramProject
+    faSpinner, faDiagramProject, faEllipsisV, faComments, faDollarSign, faBan, faPen, faMinus,
+    faInfoCircle, faExclamationCircle
 }
 from '@fortawesome/free-solid-svg-icons'
 
@@ -14,7 +15,8 @@ library.add(faChevronUp, faCircleUser, faUpRightAndDownLeftFromCenter, faHome, f
     faChevronLeft, faHouse, faPersonWalkingDashedLineArrowRight, faChartLine, faChevronDown,
     faFileExcel, faTachometerAlt, faUser, faUserTie, faSearch, faUsers, faCheck, faFileExport,
     faFilter, faList, faInbox, faUserPlus, faEllipsisVertical, faTrashCan, faEye, faEdit, faPlus,
-    faChartPie, faLink, faXmark, faSquareCheck, faChevronRight, faSpinner, faDiagramProject
+    faChartPie, faLink, faXmark, faSquareCheck, faChevronRight, faSpinner, faDiagramProject, faEllipsisV,
+    faComments, faDollarSign, faBan, faPen, faMinus, faInfoCircle, faExclamationCircle
 )
 
 export default FontAwesomeIcon

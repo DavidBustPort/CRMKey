@@ -1,5 +1,7 @@
-﻿using Application.Features.Oportunidades.Get;
+﻿using Application.Features.Oportunidades.CancelarOportunidad;
+using Application.Features.Oportunidades.Get;
 using MediatR;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Web.Api.Endpoints
 {
@@ -10,6 +12,7 @@ namespace Web.Api.Endpoints
             var group = app.MapGroup("/oportunidades")
                            .RequireAuthorization();
             group.MapGet("", GetOportunidades);
+            group.MapDelete("", CancelarOportunidad);
         }
 
         private async Task<IResult> GetOportunidades(
@@ -17,6 +20,16 @@ namespace Web.Api.Endpoints
             ISender sender)
         {
             var result = await sender.Send(query);
+            return result.Succeeded
+                ? Results.Ok(result)
+                : Results.BadRequest(result);
+        }
+
+        private async Task<IResult> CancelarOportunidad(
+            [FromBody] CancelarOportunidadCommand command,
+            ISender sender)
+        {
+            var result = await sender.Send(command);
             return result.Succeeded
                 ? Results.Ok(result)
                 : Results.BadRequest(result);

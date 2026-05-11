@@ -20,46 +20,29 @@
         </div>
         <hr class="opacity-10 mb-3 mt-0">
 
-        <ProspectosFiltersByEvolucionEtapas v-if="sessionStore.isUserManager" />
-
         <div class="row align-items-end g-3 mt-1">
+            <div class="col-12 col-md-3">
+                <FilterByName
+                    :label="'Nombre de cliente o prospecto'"
+                    v-model="store.filters.byNombre"
+                    :loading="store.isLoading"
+                    :label-italics="true"
+                />
+            </div>
             <div class="col-12 col-md-3">
                 <FilterPeriodo
                     :format="'single'"
                     :label-italics="true"
                     :loading="store.isLoading"
-                    title="Periodo de registro"
+                    title="Periodo"
                     v-model="store.filters.date"
                 />
             </div>
             <div class="col-12 col-md-3">
-                <FilterByName
-                    :loading="store.isLoading"
-                    v-model="store.filters.byNombre"
-                    :label-italics="true"
-                 />
-            </div>
-            <div class="col-12 col-md-3">
-                <FilterTipoProspecto
-                    :label-italics="true"
-                    :loading="store.isLoading"
-                    v-model="store.filters.byTipoProspecto"
-                />
-            </div>
-            <div class="col-12 col-md-3">
-                <ProspectosFiltersByRegistro />
-            </div>
-            <div class="col-md-3">
-                <ProspectosFiltersByEstatus />
-            </div>
-            <div class="col-md-3" v-if="store.filters.showManagerDetails">
-                <ProspectosFiltersByEtapaLead />
-            </div>
-            <div class="col-md-3" v-if="store.filters.showManagerDetails">
                 <FilterEtapaProyecto
-                    :label-italics="true"
+                    v-model="store.filters.byEtapa"
                     :loading="store.isLoading"
-                    v-model="store.filters.byEtapaProyecto"
+                    :label-italics="true"
                 />
             </div>
         </div>
@@ -67,33 +50,25 @@
 </template>
 
 <script lang="ts" setup>
+import FilterByName from '@/shared/common/FilterByName.vue'
+import { useEmbudoListStore } from '../../store/embudoListStore'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 import { computed, watch } from 'vue'
-import { useProspectosListStore } from '../../store/prospectosListStore'
 import FilterPeriodo from '@/shared/common/FilterPeriodo.vue'
-import FilterTipoProspecto from '@/shared/common/FilterTipoProspecto.vue'
-import ProspectosFiltersByRegistro from './ProspectosFiltersByRegistro.vue'
-import ProspectosFiltersByEstatus from './ProspectosFiltersByEstatus.vue'
-import ProspectosFiltersByEtapaLead from './ProspectosFiltersByEtapaLead.vue'
-import ProspectosFiltersByEvolucionEtapas from './ProspectosFiltersByEvolucionEtapas.vue'
-import { useSessionStore } from '@/core/store/sessionStore'
 import FilterEtapaProyecto from '@/shared/common/FilterEtapaProyecto.vue'
-import FilterByName from '@/shared/common/FilterByName.vue'
 
-const store = useProspectosListStore()
-const sessionStore = useSessionStore()
+const store = useEmbudoListStore()
 
 const hasActiveFilters = computed(() => {
     return Object.entries(store.filters).some(
         ([key, value]) =>
             value !== null &&
-            key !== 'rik' &&
-            value !== '' &&
-            key !== 'showManagerDetails'
+            key !== 'date' &&
+            value !== ''
     )
 })
 
-watch(() => store.filters, () => store.getProspectosListDebounce(false), {
+watch(() => store.filters, () => store.getEmbudoListDebounce(false), {
     deep: true
 })
 </script>

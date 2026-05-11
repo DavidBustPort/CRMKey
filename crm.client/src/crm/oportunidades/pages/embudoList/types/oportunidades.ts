@@ -1,6 +1,6 @@
 import type { EtapasOportunidades } from '@/shared/types/etapasOportunidades'
 
-interface Embudo {
+export interface Embudo {
     clienteId: number
     prospectoId: number
     oportunidadId: number

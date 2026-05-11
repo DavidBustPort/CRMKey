@@ -1,17 +1,52 @@
-﻿using Application.Common.Interfaces;
+﻿using Application.Common.Enums;
+using Application.Common.Interfaces;
 using Application.Features.Oportunidades;
+using Application.Features.Oportunidades.CancelarOportunidad;
 using Application.Features.Oportunidades.Get;
 using Dapper;
-using Domain.Enums;
 using System.Data;
 
 namespace Infrastructure.Repositories.Oportunidades
 {
     public class OportunidadesRepository(ISqlConnectionFactory factory) : IOportunidadesRepository
     {
+        public async Task<bool> CancelarOportunidad(CancelarOportunidadCommand command, CancellationToken ct)
+        {
+            using var db = await factory.CreateConnection();
+            const string sql = @"
+                UPDATE CrmOportunidades
+                SET Estatus = @estatus,
+                    Id_Causa = @causaId,
+                    FechaModificacion = @now,
+                    FechaCancelacion = @now
+                WHERE Id_Emp = 1
+                    AND Id_Cd = @sucursalId
+                    AND Id_Op = @oportunidadId
+                    AND Estatus <> @estatusCancelada";
+            try
+            {
+                var rowsAffected = await db.ExecuteAsync(new CommandDefinition(sql, new
+                {
+                    estatus = (int)EtapasOportunidades.X,
+                    causaId = command.CausaId,
+                    now = DateTime.Now,
+                    sucursalId = command.SucursalId,
+                    oportunidadId = command.OportunidadId,
+                    estatusCancelada = (int)EtapasOportunidades.C
+                }, cancellationToken: ct));
+
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error actualizando cancelacion oportunidad: {ex.Message}");
+                return false;
+            }
+        }
+
         public async Task<IReadOnlyList<OportunidadesDto>> GetAsync(GetOportunidadesQuery query)
         {
-            using var db = await factory.CreateConnection(SiteMode.sianweb);
+            using var db = await factory.CreateConnection();
             try
             {
                 var parameters = new

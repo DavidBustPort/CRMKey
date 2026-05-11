@@ -8,6 +8,27 @@ namespace Infrastructure.Repositories.Catalogs
 {
     public class CatalogsRepository(ISqlConnectionFactory factory) : ICatalogsRepository
     {
+        public async Task<IReadOnlyList<CatalogsResponse>> GetCausasCancelacion(CancellationToken ct)
+        {
+            using var db = await factory.CreateConnection(SiteMode.sianweb);
+            try
+            {
+                string sql = @$"SELECT Id_Causa AS Id
+                            , Descripcion       AS Name
+                            FROM CrmCausasCancelacion
+                            WHERE Estatus = 1";
+                var dbo = await db.QueryAsync<CatalogsResponse>(
+                    new CommandDefinition(sql, cancellationToken: ct)
+                );
+                return dbo.ToList() ?? [];
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching causas cancelaction data: {ex.Message}");
+                return [];
+            }
+        }
+
         public async Task<IReadOnlyList<CatalogsResponse>> GetRiksAsync(int? sucursalId, CancellationToken ct)
         {
             using var db = await factory.CreateConnection(SiteMode.sianweb, sucursalId);

@@ -6,3 +6,4 @@ export interface Catalogs {
 export type Rik = Catalogs
 export type Uen = Catalogs
 export type Segmento = Catalogs
+export type CausasCancelacion = Catalogs

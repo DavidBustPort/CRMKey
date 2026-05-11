@@ -1,6 +1,7 @@
 import type { Pagination } from '@/shared/components/customPagination/types'
 import type { EmbudoList } from '../types/oportunidades'
 import type { EtapasOportunidades } from '@/shared/types/etapasOportunidades'
+import type { CausasCancelacion } from '@/shared/types/catalogs'
 
 interface EmbudoFilters {
     date: {
@@ -16,4 +17,5 @@ export interface EmbudoListState {
     pagination: Pagination
     filters: EmbudoFilters
     isLoading: boolean
+    causasCancelacion: CausasCancelacion[]
 }

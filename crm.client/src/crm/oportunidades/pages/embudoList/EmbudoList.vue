@@ -6,7 +6,7 @@
     </div>
     <div class="card">
         <div class="card-body">
-
+            <EmbudoFilters />
             <hr class="my-4 hr-table">
             <EmbudoTable />
         </div>
@@ -18,6 +18,7 @@ import EmbudoTable from './components/embudoTable/EmbudoTable.vue'
 import { onMounted } from 'vue'
 import { useAlert } from '@/core/composables/useAlert'
 import { useEmbudoListStore } from './store/embudoListStore'
+import EmbudoFilters from './components/embudoFilters/EmbudoFilters.vue'
 
 const store = useEmbudoListStore()
 const { close } = useAlert()

@@ -1,6 +1,7 @@
 import { EmbudoListService } from '../services/embudoList-service'
 import debounce from 'lodash/debounce'
 import type { useEmbudoListStore } from './embudoListStore'
+import { CatalogsService } from '@/shared/services/catalogs-service'
 
 type StoreContext = ReturnType<typeof useEmbudoListStore>
 
@@ -12,6 +13,7 @@ interface Actions {
     getEmbudoList(): Promise<void>
     getEmbudoListDebounce(immediate?: boolean): Promise<void>
     setItemsPerPage(itemsPerPage: number): void
+    fetchCausasCancelacion(): Promise<void>
     clearFilters(): void
 }
 
@@ -42,6 +44,14 @@ export const actions: Actions = {
         this.pagination.itemsPerPage = itemsPerPage
         this.pagination.currentPage = 1
         debouncedFetch(this)
+    },
+
+    async fetchCausasCancelacion(this: StoreContext): Promise<void> {
+        if (this.causasCancelacion.length > 0) return
+
+        try {
+            this.causasCancelacion = await CatalogsService.getCausasCancelacion()
+        } finally {}
     },
 
     clearFilters(this: StoreContext): void {
