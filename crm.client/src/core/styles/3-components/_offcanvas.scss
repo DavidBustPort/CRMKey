@@ -1,0 +1,15 @@
+.offcanvas-xl {
+    width: 60% !important;
+}
+.offcanvas-lg {
+    width: 40% !important;
+}
+.offcanvas-md {
+    width: 30% !important;
+}
+
+@media (max-width: 768px) {
+    .offcanvas-xl, .offcanvas-lg, .offcanvas-md {
+        width: 100% !important;
+    }
+}

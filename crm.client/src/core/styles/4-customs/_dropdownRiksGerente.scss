@@ -1,0 +1,29 @@
+.rik-gerente-dropdown {
+    width: 350px;
+
+    .rik-option {
+        padding: .75rem 1rem;
+
+        &.active {
+            background-color: #e7f3ff !important;
+            color: #0d6efd !important;
+        }
+    }
+
+    .rik-option-name {
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        overflow: hidden;
+        flex: 1;
+    }
+
+    .rik-option-status {
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+    }
+
+    .search-container {
+        padding: .75rem 1rem .5rem;
+    }
+}

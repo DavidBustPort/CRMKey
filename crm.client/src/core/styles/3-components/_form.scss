@@ -1,0 +1,72 @@
+.valid-feedback {
+    display: block !important;
+}
+
+.invalid-feedback {
+    display: block !important;
+    margin-bottom: 1rem !important;
+    margin-top: 0 !important;
+}
+
+.select-highlighted,
+.form-control.select-highlighted {
+    background-color: #f8fbff !important;
+    border-color: #90caf9 !important;
+    color: #1976d2 !important;
+    font-weight: 450;
+    box-shadow: 0 0 0 0.05rem rgba(33, 150, 243, 0.08) !important;
+
+    &:hover {
+        background-color: #f0f8ff !important;
+        border-color: #64b5f6 !important;
+    }
+}
+
+.select-default {
+    background-color: #fff;
+    border-color: #ced4da;
+    color: #495057;
+}
+
+/* Focus mantiene el estilo de Bootstrap normal para todos los selects e inputs */
+.form-select:focus,
+.form-control.select-highlighted:focus {
+    background-color: #fff !important;
+    border-color: #86b7fe !important;
+    color: #212529 !important;
+    font-weight: normal !important;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+}
+
+/* Estilos para VueDatePicker */
+.datepicker-highlighted .dp__input {
+    background-color: #f8fbff !important;
+    border-color: #90caf9 !important;
+    color: #1976d2 !important;
+    font-weight: 450;
+    box-shadow: 0 0 0 0.05rem rgba(33, 150, 243, 0.08) !important;
+
+    &:hover {
+        background-color: #f0f8ff !important;
+        border-color: #64b5f6 !important;
+    }
+
+    &:focus {
+        background-color: #fff !important;
+        border-color: #86b7fe !important;
+        color: #212529 !important;
+        font-weight: normal !important;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25) !important;
+    }
+}
+
+.datepicker-default .dp__input {
+    background-color: #fff;
+    border-color: #ced4da;
+    color: #495057;
+}
+
+.filter-disabled {
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+}

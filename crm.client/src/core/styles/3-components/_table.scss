@@ -1,0 +1,32 @@
+$table-border-color: #dee2e6;
+
+.table {
+    thead,
+    tbody,
+    tfoot,
+    tr,
+    td,
+    th {
+        border-color: $table-border-color;
+    }
+
+    > :not(:last-child)> :last-child>* {
+        border-color: $table-border-color;
+    }
+}
+
+.table-hover tbody tr.no-hover {
+    --bs-table-hover-bg: transparent !important;
+    --bs-table-accent-bg: transparent !important;
+
+    &:hover {
+        background-color: transparent !important;
+    }
+}
+
+.hr-table {
+    border: none;
+    height: 2px;
+    margin: 2rem 0;
+    background: linear-gradient(90deg, transparent, #007bff, transparent);
+}

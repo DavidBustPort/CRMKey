@@ -1,0 +1,12 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Application/Application.csproj" Id="891a68ec-b829-44c1-aaa6-f4c731e17898" />
+    <Project Path="src/Domain/Domain.csproj" Id="13a31d15-1338-4f82-b154-b58be32e38f7" />
+    <Project Path="src/Infrastructure/Infrastructure.csproj" Id="be45b84c-356b-4ac1-9b4e-46c8ac0821f2" />
+    <Project Path="src/Web.Api/Web.Api.csproj" />
+  </Folder>
+  <Project Path="crm.client/crm.client.esproj">
+    <Build />
+    <Deploy />
+  </Project>
+</Solution>

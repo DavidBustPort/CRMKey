@@ -1,0 +1,23 @@
+@import './1-variables/app';
+
+@import 'bootstrap/scss/bootstrap';
+
+@import './2-mixins/buttons';
+
+@import './3-components/wrapper';
+@import './3-components/sidebar';
+@import './3-components/main';
+@import './3-components/navbar';
+@import './3-components/hamburger';
+@import './3-components/dropdown';
+@import './3-components/reboot';
+@import './3-components/content';
+@import './3-components/card';
+@import './3-components/form';
+@import './3-components/table';
+@import './3-components/buttons';
+//@import './3-components/offcanvas';
+
+@import './4-customs/dropdownRiksGerente';
+@import './4-customs/etapasProyectos';
+
