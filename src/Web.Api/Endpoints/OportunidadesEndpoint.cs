@@ -1,4 +1,5 @@
-﻿using Application.Features.Oportunidades.CancelarOportunidad;
+﻿using Application.Features.Oportunidades.ActualizarVpo;
+using Application.Features.Oportunidades.CancelarOportunidad;
 using Application.Features.Oportunidades.Get;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ namespace Web.Api.Endpoints
                            .RequireAuthorization();
             group.MapGet("", GetOportunidades);
             group.MapDelete("", CancelarOportunidad);
+            group.MapPut("/actualizar-vpo", ActualizarVpo);
         }
 
         private async Task<IResult> GetOportunidades(
@@ -27,6 +29,16 @@ namespace Web.Api.Endpoints
 
         private async Task<IResult> CancelarOportunidad(
             [FromBody] CancelarOportunidadCommand command,
+            ISender sender)
+        {
+            var result = await sender.Send(command);
+            return result.Succeeded
+                ? Results.Ok(result)
+                : Results.BadRequest(result);
+        }
+
+        private async Task<IResult> ActualizarVpo(
+            [FromBody] ActualizarVpoCommand command,
             ISender sender)
         {
             var result = await sender.Send(command);

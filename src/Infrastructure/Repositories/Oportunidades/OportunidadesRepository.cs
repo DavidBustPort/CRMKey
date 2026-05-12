@@ -1,6 +1,7 @@
 ﻿using Application.Common.Enums;
 using Application.Common.Interfaces;
 using Application.Features.Oportunidades;
+using Application.Features.Oportunidades.ActualizarVpo;
 using Application.Features.Oportunidades.CancelarOportunidad;
 using Application.Features.Oportunidades.Get;
 using Dapper;
@@ -10,6 +11,34 @@ namespace Infrastructure.Repositories.Oportunidades
 {
     public class OportunidadesRepository(ISqlConnectionFactory factory) : IOportunidadesRepository
     {
+        public async Task<bool> ActualizarVpo(ActualizarVpoCommand command, CancellationToken ct)
+        {
+            using var db = await factory.CreateConnection();
+            const string sql = @"
+                UPDATE CrmOportunidades
+                SET MontoProyecto = @vpo
+                WHERE Id_Emp = 1
+                    AND Id_Cd = @sucursalId
+                    AND Id_Op = @oportunidadId";
+
+            try
+            {
+                var rowsAffected = await db.ExecuteAsync(new CommandDefinition(sql, new
+                {
+                    vpo = command.Vpo,
+                    sucursalId = command.SucursalId,
+                    oportunidadId = command.OportunidadId
+                }, cancellationToken: ct));
+
+                return rowsAffected > 0;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error actualizando vpo de oportunidad: {ex.Message}");
+                return false;
+            }
+        }
+
         public async Task<bool> CancelarOportunidad(CancelarOportunidadCommand command, CancellationToken ct)
         {
             using var db = await factory.CreateConnection();

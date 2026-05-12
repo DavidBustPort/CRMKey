@@ -1,0 +1,69 @@
+.vpo-editable-container {
+    min-height: 31px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.vpo-amount {
+    font-weight: 700;
+    color: #2e7d32;
+    background-color: #e8f5e9;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+.vpo-edit-btn {
+    opacity: 0.4;
+    border: none;
+    background: transparent;
+    padding: 0.2rem 0.4rem;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+        opacity: 1;
+        background-color: rgba(var(--bs-primary-rgb), 0.1);
+        transform: scale(1.1);
+    }
+}
+
+.vpo-input {
+    border-radius: 6px;
+    border: 1px solid var(--bs-border-color);
+    font-weight: 600;
+    text-align: right;
+
+    &:focus {
+        box-shadow: 0 0 0 0.25 margin rgba(var(--bs-primary-rgb), 0.25);
+        border-color: var(--bs-primary);
+    }
+
+    // Quitar flechas del input number (Chrome, Safari, Edge, Opera)
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+}
+
+.invalid-feedback {
+    font-size: 0.7rem;
+    font-weight: 600;
+    margin-top: 2px;
+}
+
+.d-flex {
+    animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-2px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

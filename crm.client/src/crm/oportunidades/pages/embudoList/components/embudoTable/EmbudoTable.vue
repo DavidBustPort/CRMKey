@@ -32,7 +32,6 @@
                 </template>
                 <template #row="{ item }">
                     <tr
-                        @click="toggleRow(item.oportunidadId)"
                         :class="{ 'table-active fw-bold': isRowExpanded(item.oportunidadId) }">
                         <td>
                             <button class="btn btn-sm btn-outline-secondary me-2" @click.stop="toggleRow(item.oportunidadId)">
@@ -51,7 +50,14 @@
                             style="max-width: 150px;"
                             :title="item.aplicacion"
                         >{{ item.aplicacion }}</td>
-                        <td>{{ item.vpo }}</td>
+                        <td>
+                            <VpoEdit
+                                v-if="!sessionStore.isUserManager"
+                                :oportunidad-id="item.oportunidadId"
+                                :vpo="item.vpo"
+                            />
+                            <span v-else>{{ formatCurrency(item.vpo) }}</span>
+                        </td>
                         <td>{{ item.vpt }}</td>
                         <td>{{ item.integralidad }}</td>
                         <td></td>
@@ -93,8 +99,12 @@ import BaseTable from '@/shared/components/baseTable/BaseTable.vue'
 import { computed, ref, watch } from 'vue'
 import { useEmbudoListStore } from '../../store/embudoListStore'
 import ActionMenu from './actionMenu/ActionMenu.vue'
+import VpoEdit from './vpoEdit/VpoEdit.vue'
+import { useSessionStore } from '@/core/store/sessionStore'
+import { formatCurrency } from '@/core/utils/numbers'
 
 const store = useEmbudoListStore()
+const sessionStore = useSessionStore()
 const embudoList = computed(() => store.oportunidades.oportunidades)
 
 const expandedRowId = ref<number | null>(null)

@@ -2,6 +2,7 @@ import { apiInstance } from '@/core/services'
 import type { ApiWrapper } from '@/core/types/apiWrapper'
 import type { EmbudoListApiRequest } from '../types/embudoListApiReq'
 import type { EmbudoList } from '../types/oportunidades'
+import type { ApiActualizarVpoReq } from '../components/embudoTable/vpoEdit/types'
 
 let abortController: AbortController | null = null
 
@@ -53,6 +54,19 @@ export const EmbudoListService = {
             return {
                 succeeded: false,
                 message: 'Error al cancelar la oportunidad',
+                data: false
+            } as ApiWrapper<boolean>
+        }
+    },
+
+    actualizarVpo: async (req: ApiActualizarVpoReq): Promise<ApiWrapper<boolean>> => {
+        try {
+            const res = await apiInstance.put<ApiWrapper<boolean>>('oportunidades/actualizar-vpo', req)
+            return res.data
+        } catch {
+            return {
+                succeeded: false,
+                message: 'Error al actualizar el Vpo',
                 data: false
             } as ApiWrapper<boolean>
         }

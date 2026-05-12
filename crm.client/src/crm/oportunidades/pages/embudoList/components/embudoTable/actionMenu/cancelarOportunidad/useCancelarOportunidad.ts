@@ -72,6 +72,8 @@ export function useCancelarOportunidad(oportunidadId: number): CancelarOportunid
             if (res.succeeded && res.data) {
                 modalStep2Ref.value?.close()
 
+                store.oportunidades.oportunidades = store.oportunidades.oportunidades.filter(o => o.oportunidadId !== oportunidadId)
+
                 push.success({
                     title: '¡Éxito!',
                     message: `La oportunidad #${oportunidadId} ha sido cancelada correctamente.`
